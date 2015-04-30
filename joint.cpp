@@ -23,14 +23,14 @@ void Joint::setup()
 	pid->SetMode(AUTOMATIC);
 	currentDirection = -100;
 }
-
+int Joint::getPosition()
+{
+	return input;
+}
 void Joint::operate()
 {
 	input = encoder->read();
 	pid->Compute();
-	Serial.print(input);
-	Serial.print(" -- ");
-	Serial.println(output);
 	int direction = 0;
 	if (output > 127) {
 		direction = LOW;
@@ -44,8 +44,7 @@ void Joint::operate()
 	}
 	analogWrite(pinPower, abs(output - 127));
 }
-
-void Joint::setSetPoint(int _setpoint)
+void Joint::setSetpoint(int _setpoint)
 {
 	setpoint = _setpoint;
 }
