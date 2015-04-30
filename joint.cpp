@@ -31,20 +31,13 @@ void Joint::operate()
 {
 	input = encoder->read();
 	pid->Compute();
-	int direction = 0;
-	if (output > 127) {
-		direction = LOW;
-	}
-	else {
-		direction = HIGH;
-	}
+	int direction = output > 127 ? LOW : HIGH;
 	if (currentDirection != direction) {
 		currentDirection = direction;
 		digitalWrite(pinDirection, direction);
 	}
 	analogWrite(pinPower, abs(output - 127));
 }
-void Joint::setSetpoint(int _setpoint)
-{
+void Joint::setSetpoint(int _setpoint){
 	setpoint = _setpoint;
 }
