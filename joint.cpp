@@ -45,7 +45,7 @@ void Joint::operate()
 	analogWrite(pinPower, abs(output - 127));
 }
 
-void Joint::setSetPoint(int _setpoint)
+void Joint::setSetPoint(int _setPoint)
 {
-	setpoint = _setpoint;
+	setPoint = _setPoint;
 }

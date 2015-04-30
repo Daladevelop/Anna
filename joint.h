@@ -18,7 +18,7 @@ private:
 	int currentDirection;
 	double input;
 	double output;
-	double setpoint;
+	double setPoint;
 	Encoder *encoder;
 	PID *pid;
 };
