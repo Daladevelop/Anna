@@ -11,12 +11,18 @@ public:
 	void operate();
 	void setSetpoint(int _setpoint);
 	int getPosition();
+	bool inPosition();
+	void relax();
 private:
+	bool relaxing;
+	void isInPosition(int currenPosition);
 	int pinRotary1;
 	int pinRotary2;
 	int pinDirection;
 	int pinPower;
 	int currentDirection;
+	int inPositionCounter;
+	bool inPosition;
 	double input;
 	double output;
 	double setpoint;

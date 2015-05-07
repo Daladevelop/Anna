@@ -6,8 +6,9 @@ Joint::Joint(int pin_rotary_1, int pin_rotary_2, int pin_power, int pin_directio
 	pinRotary2 = pin_rotary_2;
 	pinDirection = pin_direction;
 	pinPower = pin_power;
+	inPositionCounter = 0;
+	relaxing = true;
 }
-
 void Joint::setup()
 {
 	pinMode(pinRotary1, INPUT_PULLUP);
@@ -27,9 +28,23 @@ int Joint::getPosition()
 {
 	return input;
 }
+bool Joint::inPosition()
+{
+	return isInPosition;
+}
+void Joint::relax()
+{
+	relaxing = true;
+}
 void Joint::operate()
 {
 	input = encoder->read();
+	if (relaxing)
+	{
+		analogWrite(pinPower, 0);
+		return;
+	}
+	isInPosition(input);
 	pid->Compute();
 	int direction = output > 127 ? LOW : HIGH;
 	if (currentDirection != direction) {
@@ -38,6 +53,22 @@ void Joint::operate()
 	}
 	analogWrite(pinPower, abs(output - 127));
 }
+void Joint::isInPosition(int current)
+{
+	if (abs(setpoint - current) > 5)
+	{
+		inPositionCounter = 0;
+		inPosition = false;
+		return;
+	}
+	if (inPositionCounter > 100)
+	{
+		inPosition = true;
+		return;
+	}
+	inPositionCounter++;
+}
 void Joint::setSetpoint(int _setpoint){
 	setpoint = _setpoint;
+	relaxing = false;
 }
