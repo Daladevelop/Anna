@@ -1,0 +1,19 @@
+
+
+
+
+
+.build/uno/src/lab/arduino/anna1.cpp : src/lab/arduino/anna1.ino
+	@mkdir -p .build/uno/src/lab/arduino
+	@echo src/lab/arduino/anna1.ino
+	@/usr/local/bin/ino preproc  -o $@ $^
+
+.build/uno/src/lab/arduino/anna2.cpp : src/lab/arduino/anna2.ino
+	@mkdir -p .build/uno/src/lab/arduino
+	@echo src/lab/arduino/anna2.ino
+	@/usr/local/bin/ino preproc  -o $@ $^
+
+
+all : .build/uno/src/lab/arduino/anna1.cpp .build/uno/src/lab/arduino/anna2.cpp
+	@true
+

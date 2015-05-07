@@ -1,8 +1,8 @@
 #ifndef JOINT_H
 #define JOINT_H
 
-#include <Encoder.h>
 #include <PID_v1.h>
+#include <Encoder.h>
 
 class Joint {
 public:
@@ -22,7 +22,6 @@ private:
 	int pinPower;
 	int currentDirection;
 	int inPositionCounter;
-	bool inPosition;
 	double input;
 	double output;
 	double setpoint;

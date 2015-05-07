@@ -30,7 +30,7 @@ int Joint::getPosition()
 }
 bool Joint::inPosition()
 {
-	return isInPosition;
+	return inPosition;
 }
 void Joint::relax()
 {
