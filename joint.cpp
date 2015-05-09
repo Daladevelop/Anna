@@ -28,7 +28,7 @@ int Joint::getPosition()
 {
 	return input;
 }
-bool Joint::inPosition()
+bool Joint::isInPosition()
 {
 	return inPosition;
 }
@@ -46,7 +46,7 @@ void Joint::operate()
 	}
 	isInPosition(input);
 	pid->Compute();
-	int direction = output > 127 ? LOW : HIGH;
+	int direction = output > 127 ? HIGH : LOW;
 	if (currentDirection != direction) {
 		currentDirection = direction;
 		digitalWrite(pinDirection, direction);

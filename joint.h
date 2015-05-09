@@ -11,7 +11,7 @@ public:
 	void operate();
 	void setSetpoint(int _setpoint);
 	int getPosition();
-	bool inPosition();
+	bool isInPosition();
 	void relax();
 private:
 	bool relaxing;
@@ -27,6 +27,7 @@ private:
 	double setpoint;
 	Encoder *encoder;
 	PID *pid;
+    bool inPosition; 
 };
 
 
