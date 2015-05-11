@@ -19,7 +19,8 @@ void Joint::setup()
 	input = 0;
 	output = 0;
 	setpoint = 0;
-	pid = new PID(&input, &output, &setpoint, 1, 0.05, 0.1, DIRECT);
+    inPosition = false;
+	pid = new PID(&input, &output, &setpoint, 1, 0.04, 0.1, DIRECT);
 	encoder->write(0);
 	pid->SetMode(AUTOMATIC);
 	currentDirection = -100;
@@ -55,7 +56,7 @@ void Joint::operate()
 }
 void Joint::isInPosition(int current)
 {
-	if (abs(setpoint - current) > 5)
+	if (abs(setpoint - current) > 150)
 	{
 		inPositionCounter = 0;
 		inPosition = false;
@@ -71,4 +72,5 @@ void Joint::isInPosition(int current)
 void Joint::setSetpoint(int _setpoint){
 	setpoint = _setpoint;
 	relaxing = false;
+    inPosition = false;
 }

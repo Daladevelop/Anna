@@ -21,6 +21,10 @@
 #define PIN_WRIST_ROTARY2			31
 #define PIN_WRIST_POWER				6
 #define PIN_WRIST_DIRECTION			7
+#define PIN_KNEE_ROTARY1            32
+#define PIN_KNEE_ROTARY2            33
+#define PIN_KNEE_DIRECTION          13
+#define PIN_KNEE_POWER              11
 
 //SKF = vrid munstycket
 
@@ -29,23 +33,14 @@
 class Robot {
     public:
         void setup();
-        void moveShoulder(int position);
-        void moveElbow(int position);
-        void moveWrist(int position);
-        void moveArmloomSke(int position);
-        void moveArmloomSkf(int position);
-        int getShoulderPosition();
-        int getElbowPosition();
-        int getWristPosition();
-        int getArmloomSkfPosition();
-        int getArmloomSkePosition();
         void operate();
-    private:
+        bool inPosition();
         Joint *shoulder;
         Joint *elbow;
         Joint *armloomSkf;
         Joint *armloomSke;
         Joint *wrist;
+        Joint *knee;
 };
 
 #endif
